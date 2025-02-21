@@ -1,0 +1,9 @@
+{
+  "name": "nrmApp",
+  "displayName": "nrmApp",
+
+  "android": {
+    "userInterfaceStyle": "automatic",
+    "orientation": "default"
+  }
+}
