@@ -1,11 +1,11 @@
-import React, {useEffect, useRef, useState } from 'react';
-import {BackHandler, Platform, ActivityIndicator} from 'react-native';
+import React, { useEffect, useRef, useState } from 'react';
+import { BackHandler, Platform, ActivityIndicator } from 'react-native';
 
-import {StyleSheet, View, Button, Text, PermissionsAndroid} from 'react-native';
+import { StyleSheet, View, Button, Text, PermissionsAndroid } from 'react-native';
 import { request, PERMISSIONS } from 'react-native-permissions';
 import WebView from 'react-native-webview';
 
-import {getWebviewUrl} from '../helper/utils';
+import { getWebviewUrl } from '../helper/utils';
 
 
 const Maps = props => {
@@ -27,13 +27,13 @@ const Maps = props => {
         console.warn(err);
       }
     };
-  
+
     requestLocationPermission();
 
     const onAndroidBackPress = () => {
       if (webViewRef.current) {
         webViewRef.current.injectJavaScript('window.history.back();');
-        return true; 
+        return true;
       }
       return false;
     };
@@ -60,7 +60,7 @@ const Maps = props => {
   console.log(dist_name);
   const geoserver_url = props.route.params.geoserver_url;
   console.log(geoserver_url);
-  const web_uri = getWebviewUrl('maps', dist_name, block_name, geoserver_url, block_id);
+  const web_uri = getWebviewUrl('maps/', dist_name, block_name, geoserver_url, block_id);
 
   const handleLoadProgress = event => {
     setLoadingProgress(event.nativeEvent.progress);
@@ -98,8 +98,18 @@ const styles = StyleSheet.create({
     bottom: 0,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(255, 255, 255, 0.8)',
+    backgroundColor: 'rgba(255, 255, 255, 0.7)',
     zIndex: 1,
+  },
+  debugContainer: {
+    padding: 10,
+    backgroundColor: '#f0f0f0',
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
+  },
+  debugText: {
+    fontSize: 12,
+    color: '#333',
   },
   loadingText: {
     marginTop: 10,
@@ -108,11 +118,11 @@ const styles = StyleSheet.create({
 });
 
 
-Maps.navigationOptions = ({navigation}) => ({
-  title: 'Commons Connect', 
+Maps.navigationOptions = ({ navigation }) => ({
+  title: 'Commons Connect',
   headerRight: () => (
     <Button
-      title="< Location" 
+      title="< Location"
       onPress={() => {
         navigation.goBack();
       }}
